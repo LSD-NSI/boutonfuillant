@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button qui fuit la souris</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #f0f0f0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #movingButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            position: absolute;
+            transition: all 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="movingButton">Attrape-moi !</button>
+
+    <script>
+        const button = document.getElementById('movingButton');
+
+        document.addEventListener('mousemove', (event) => {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            const buttonRect = button.getBoundingClientRect();
+            const buttonX = buttonRect.left + buttonRect.width / 2;
+            const buttonY = buttonRect.top + buttonRect.height / 2;
+
+            const distanceX = mouseX - buttonX;
+            const distanceY = mouseY - buttonY;
+            const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+            if (distance < 150) { // Si la souris est à moins de 100 pixels du bouton
+                const moveX = (distanceX / distance) * 90;
+                const moveY = (distanceY / distance) * 90;
+
+                let newLeft = button.offsetLeft - moveX;
+                let newTop = button.offsetTop - moveY;
+
+                // Empêche le bouton de sortir de l'écran (limites de la fenêtre)
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+
+                // Vérification des limites horizontales
+                if (newLeft < 0) {
+                    newLeft = 0;
+                } else if (newLeft + buttonRect.width > windowWidth) {
+                    newLeft = windowWidth - buttonRect.width;
+                }
+
+                // Vérification des limites verticales
+                if (newTop < 0) {
+                    newTop = 0;
+                } else if (newTop + buttonRect.height > windowHeight) {
+                    newTop = windowHeight - buttonRect.height;
+                }
+
+                // Applique les nouvelles positions avec les limites
+                button.style.left = `${newLeft}px`;
+                button.style.top = `${newTop}px`;
+            }
+        });
+
+        // Redirection vers la page test.html quand on clique sur le bouton
+        button.addEventListener('click', () => {
+            window.location.href = 'test.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de test</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffcccb;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #333;
+        }
+
+        #easterEgg {
+            display: none;
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #ff6347;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bienvenue sur la page de test !</h1>
+    <button id="showEasterEgg">Clique ici pour une surprise !</button>
+    <p id="easterEgg">🎉 Félicitations, vous avez trouvé l'easter egg ! 🎉</p>
+
+    <script>
+        const button = document.getElementById('showEasterEgg');
+        const easterEgg = document.getElementById('easterEgg');
+
+        button.addEventListener('click', () => {
+            easterEgg.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
