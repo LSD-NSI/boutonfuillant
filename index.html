@@ -45,8 +45,8 @@
             const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
             if (distance < 150) { // Si la souris est à moins de 100 pixels du bouton
-                const moveX = (distanceX / distance) * 150;
-                const moveY = (distanceY / distance) * 150;
+                const moveX = (distanceX / distance) * 200;
+                const moveY = (distanceY / distance) * 200;
 
                 let newLeft = button.offsetLeft - moveX;
                 let newTop = button.offsetTop - moveY;
