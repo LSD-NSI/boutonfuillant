@@ -11,9 +11,10 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            background-color: #f0f0f0;
+            background-color: #1e1e2f;
             margin: 0;
             overflow: hidden;
+            color: white;
         }
 
         #movingButton {
@@ -22,6 +23,10 @@
             cursor: pointer;
             position: absolute;
             transition: all 0.1s ease;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -44,38 +49,35 @@
             const distanceY = mouseY - buttonY;
             const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-            if (distance < 150) { // Si la souris est à moins de 100 pixels du bouton
+            if (distance < 150) {
                 const moveX = (distanceX / distance) * 200;
                 const moveY = (distanceY / distance) * 200;
 
                 let newLeft = button.offsetLeft - moveX;
                 let newTop = button.offsetTop - moveY;
 
-                // Empêche le bouton de sortir de l'écran (limites de la fenêtre)
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
 
-                // Vérification des limites horizontales
+                // Si touche un bord, téléporte de l'autre côté
                 if (newLeft < 0) {
-                    newLeft = 0;
-                } else if (newLeft + buttonRect.width > windowWidth) {
                     newLeft = windowWidth - buttonRect.width;
+                } else if (newLeft + buttonRect.width > windowWidth) {
+                    newLeft = 0;
                 }
 
-                // Vérification des limites verticales
                 if (newTop < 0) {
-                    newTop = 0;
-                } else if (newTop + buttonRect.height > windowHeight) {
                     newTop = windowHeight - buttonRect.height;
+                } else if (newTop + buttonRect.height > windowHeight) {
+                    newTop = 0;
                 }
 
-                // Applique les nouvelles positions avec les limites
                 button.style.left = `${newLeft}px`;
                 button.style.top = `${newTop}px`;
             }
         });
 
-        // Redirection vers la page test.html quand on clique sur le bouton
+        // Redirection au clic
         button.addEventListener('click', () => {
             window.location.href = 'test.html';
         });
